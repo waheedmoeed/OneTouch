@@ -1,13 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {Route, BrowserRouter, Redirect} from 'react-router-dom'
 
+import SignUpForm from './Authorization/SignUpForm';
+import SignInForm from './Authorization/SignInForm';
+import Home from "./Main/Home"
+import * as serviceWorker from './serviceWorker';
+import './Styles/index.css';
+
+
+const PrivateRoute = ({ component: Component, ...props }) => {
+  return (
+    <Route
+      {...props}
+      render={innerProps =>
+        localStorage.getItem("sessionToken")? 
+            <Component {...innerProps} />
+            :
+            <Redirect to="/" />
+      }
+    />
+  );
+};
+
+const routing = (
+  <BrowserRouter>
+        <PrivateRoute exact path="/home" component = {Home}/>       
+        <Route exact path = "/" component={SignUpForm}/>
+        <Route exact path = "/sign-in" component={SignInForm}/>
+  </BrowserRouter>
+)
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    routing,
   document.getElementById('root')
 );
 
