@@ -99,6 +99,10 @@
   margin-top: 10px;
 }
 
+.FormField__Input:hover {
+  border-bottom: 1px solid #199087
+}
+
 .FormField__Input::placeholder {
   color: #616E7F;
 }
@@ -139,4 +143,16 @@
   display: inline-block;
   padding-bottom: 2px;
   margin-left: 5px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #2E4158 inset !important;
+}
+
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
 }

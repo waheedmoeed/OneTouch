@@ -1,7 +1,9 @@
 import React, {  Component } from 'react'
 import { Link } from 'react-router-dom';
-
 import  {NavLink} from 'react-router-dom';
+
+import Axios from "axios"
+
 import "../Styles/Authorization/MainAuth.css"
 
 
@@ -13,6 +15,8 @@ class SignInForm extends Component{
             email: '',
             password: ''
         };
+        this.email =""
+        this.password=""
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,26 +24,31 @@ class SignInForm extends Component{
 
     handleChange(e) {
         let target = e.target;
-        let value = target.type === 'checkbox' ? target.checked : target.value;
-        let name = target.name;
-
-        this.setState({
-          [name]: value
-        });
+        if(e.target.type==="email"){
+            this.email = target.value
+        }else{
+            this.password = target.value
+        }
     }
 
     handleSubmit(e) {
         e.preventDefault();
-
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
+        const user = {
+            email: this.email,
+            password: this.password
+        }
+        Axios.post("http://onetouch-portal.herokuapp.com/authenticateUser/", user).then((response)=>{
+            if(response.status === 200){
+              localStorage.setItem("sessionToken", response.data.session)
+              alert(response.data.session.email)
+            }
+          }).catch((error)=>{
+            alert(error)
+          })
     }
-
-
-
     render(){
         return(
-            <div class="App">
+            <div className="App">
                     <div className = "App__Aside"></div>           
                     <div className = "App__Form">                   
                         <div className="PageSwitcher">                
@@ -51,41 +60,25 @@ class SignInForm extends Component{
                             or                 
                             <NavLink exact to ="/" className ="FormTitle__Link "  activeClassName = "FormTitle__Link--Active"> Sign Up</NavLink>
                         </div>
-
             <div className = "FormCenter">
 
             <form className = "FormFields" onSubmit = {this.handleSubmit}>
-                   
-                  
-
                    <div className = "FormField">
-
                        <label className = "FormField__Label" htmlFor="email">Email Address</label>
                        <input 
-                           type = "email" id = "email" className = "FormField__Input" placeholder = "Enter your Email ID" 
-                           value={this.state.email} onChange={this.handleChange} name="email">
-                       </input>
-                   
+                           type = "email" id="email" className = "FormField__Input" placeholder = "Enter your Email ID"  onChange={this.handleChange} name="email">
+                       </input>                  
                   </div> 
-
                   <div className = "FormField">
-
                        <label className = "FormField__Label" htmlFor="password">Password</label>
                        <input type = "password" id = "password" className = "FormField__Input" placeholder = "Enter your Password"
-                        name="password"  value={this.state.password} onChange={this.handleChange}>
-
-                        </input>
-                   
+                        name="password" onChange={this.handleChange}>
+                        </input>                   
                   </div> 
-
-
                   <div className= "FormField">
-                        <button className ="FormField__Button mr-20">Sign In</button>
-
-                       <Link exact to = "/" className = "FormField__Link" > Create an Account </Link>
+                        <button className ="FormField__Button mr-20" type="submit">Sign In</button>
+                       <Link exact="true" to="/" className = "FormField__Link" > Create an Account </Link>
                   </div>
-
-
             </form> 
 
         </div>

@@ -56,7 +56,7 @@ class SignUpForm extends Component{
 
             <div className = "FormCenter">
 
-            <form onSubmit={this.handleSubmit}className = "FormFields" onSubmit = {this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="FormFields" onSubmit = {this.handleSubmit}>
                    
                   <div className = "FormField">
 
@@ -111,7 +111,7 @@ class SignUpForm extends Component{
                   </div>
 
                   <div className="FormField">
-                  <button className="FormField__Button mr-20">Sign up</button> <Link to="/sign-in" className="FormField__Link">Already have an account</Link>
+                  <button className="FormField__Button mr-20" type="submit">Sign up</button> <Link to="/sign-in" className="FormField__Link">Already have an account</Link>
               </div>
 
 
