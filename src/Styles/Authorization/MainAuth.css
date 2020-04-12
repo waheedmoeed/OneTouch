@@ -156,3 +156,11 @@ input:-webkit-autofill:active  {
 input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
 }
+
+.FormField__Input:focus:invalid {
+  border-bottom: 2px dashed red;
+}
+
+/* input:invalid:required {
+  background-image: linear-gradient(to right, pink, lightgreen);
+} */

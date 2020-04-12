@@ -4,44 +4,40 @@ import { Link } from 'react-router-dom';
 import  {NavLink} from 'react-router-dom';
 import "../Styles/Authorization/MainAuth.css"
 
+  class SignUpForm extends Component{
 
-class SignUpForm extends Component{
-
-     constructor() {
-          super();
+        constructor(props) {
+          super(props);
   
           this.state = {
-              email: '',
-              password: '',
-              fname: '',
-              lname: '',
-              hasAgreed: false
+            fname: '',
+            lname: '',
+            email: '',
+            password: '', 
+            checked: false,
           };
   
           this.handleChange = this.handleChange.bind(this);
           this.handleSubmit = this.handleSubmit.bind(this);
       }
-  
+
       handleChange(e) {
-          let target = e.target;
+        let target = e.target;
           let value = target.type === 'checkbox' ? target.checked : target.value;
           let name = target.name;
-  
           this.setState({
             [name]: value
           });
+          
       }
   
-      handleSubmit(e) {
-          e.preventDefault();
-  
-          console.log('The form was submitted with the following data:');
-          console.log(this.state);
+      handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state);
       }
-  
     render(){
         return(
-            <div class="App">
+            <div className="App">
                     <div className = "App__Aside"></div>           
                     <div className = "App__Form">                   
                         <div className="PageSwitcher">                
@@ -56,14 +52,14 @@ class SignUpForm extends Component{
 
             <div className = "FormCenter">
 
-            <form onSubmit={this.handleSubmit} className="FormFields" onSubmit = {this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="FormFields" >
                    
                   <div className = "FormField">
 
                        <label className = "FormField__Label" htmlFor="fname">First Name</label>
                        <input 
-                            type = "text" id = "fname" className = "FormField__Input" placeholder = "Enter your First Name" 
-                            name="fname" value={this.state.fname} onChange={this.handleChange}>
+                            type = "text" id = "fname" className = "FormField__Input" minLength="2" placeholder = "Enter your First Name" 
+                            name="fname" value={this.state.fname} onChange={this.handleChange} required>
 
                        </input>
                    
@@ -73,8 +69,8 @@ class SignUpForm extends Component{
 
                        <label className = "FormField__Label" htmlFor="lname">Last Name</label>
                        <input 
-                          type = "text" id = "lname" className = "FormField__Input" placeholder = "Enter your Last Name"
-                           name="lname" value={this.state.lname} onChange={this.handleChange}>
+                          type = "text" id = "lname" className = "FormField__Input" minLength="2" placeholder = "Enter your Last Name"
+                           name="lname" value={this.state.lname} onChange={this.handleChange} noValidate required>
 
                         </input>
                    
@@ -82,10 +78,10 @@ class SignUpForm extends Component{
 
                    <div className = "FormField">
 
-                       <label className = "FormField__Label" htmlFor="email">Email Address</label>
+                       <label className = "FormField__Label" htmlFor="email" >Email Address</label>
                        <input 
                             type = "email" id = "email" className = "FormField__Input" placeholder = "Enter your Email ID"
-                            name="email" value={this.state.email} onChange={this.handleChange}>
+                            name="email" value={this.state.email} onChange={this.handleChange} noValidate required>
 
                         </input>
                    
@@ -96,8 +92,8 @@ class SignUpForm extends Component{
                        <label className = "FormField__Label" htmlFor="password">Password</label>
                        <input 
                        
-                             type = "password" id = "password" className = "FormField__Input" placeholder = "Enter your Password"
-                             name="password" value={this.state.password} onChange={this.handleChange}>
+                             type = "password" id = "password" className = "FormField__Input" minLength="8" placeholder = "Enter your Password"
+                             name="password" value={this.state.password} onChange={this.handleChange} noValidate required>
 
                         </input>
                    
@@ -105,8 +101,8 @@ class SignUpForm extends Component{
 
                   <div className= "FormField">
                        <label className = "FormField__CheckboxLabel"></label>
-                       <input classname = "FormField__Checkbox" type="checkbox" value={this.state.hasAgreed} onChange={this.handleChange}name="hasAgreed"/>I agree all statements in
-                       <a href ="#" className = "FormField__TermsLink">terms of service</a>
+                       <input className = "FormField__Checkbox" type="checkbox" value={this.state.checked} onChange={this.handleChange} name="checked" noValidate required/>I agree all statements in
+                       <a href ="#test" className = "FormField__TermsLink">terms of service</a>
                      
                   </div>
 
