@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import  {NavLink} from 'react-router-dom';
 import "../Styles/Authorization/MainAuth.css"
-
+let axios = require("axios");
   class SignUpForm extends Component{
 
         constructor(props) {
@@ -14,7 +14,7 @@ import "../Styles/Authorization/MainAuth.css"
             lname: '',
             email: '',
             password: '', 
-            checked: false,
+            
           };
   
           this.handleChange = this.handleChange.bind(this);
@@ -33,8 +33,35 @@ import "../Styles/Authorization/MainAuth.css"
   
       handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        
+        // const data = new FormData(event.target);
+       
+    let config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       }
+    }
+  axios.post("https://onetouch-portal.herokuapp.com/createUser/",{
+      firstName:this.state.fname ,
+      lastName:this.state.lname,
+	    email:this.state.email,
+	    password:this.state.password,
+      // redirect_uri:"https://localhost:3000/instagaram-redirect/",
+      
+  }, config).catch((err) => {
+      console.log(err)
+      // logger.error(err)
+      // res.send(err)
+  });
+
+        
+
+        console.log("User Successfully Added");
+      }
+
+
+      
     render(){
         return(
             <div className="App">
