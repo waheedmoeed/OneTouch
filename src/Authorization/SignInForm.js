@@ -1,10 +1,15 @@
 import React, {  Component } from 'react'
 import { Link } from 'react-router-dom';
 import  {NavLink} from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 import Axios from "axios"
 
 import "../Styles/Authorization/MainAuth.css"
+
+
+var Cookies1 = Cookies;
+var now = new Date();
+now.setHours(now.getHours()+1);
 
 
 class SignInForm extends Component{
@@ -22,6 +27,8 @@ class SignInForm extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    
+
     handleChange(e) {
         let target = e.target;
         if(e.target.type==="email"){
@@ -30,16 +37,23 @@ class SignInForm extends Component{
             this.password = target.value
         }
     }
-
+    
     handleSubmit(e) {
         e.preventDefault();
         const user = {
             email: this.email,
             password: this.password
         }
+        
         Axios.post("http://onetouch-portal.herokuapp.com/authenticateUser/", user).then((response)=>{
+            
             if(response.status === 200){
-              localStorage.setItem("sessionToken", response.data.session)
+              //localStorage.setItem("sessionToken", response.data.session)
+              
+              Cookies1.set('email', response.data.session.email , { expires: now },{ domain: 'localhost.com' }, { sameSite: 'strict'});
+              Cookies1.set('sessionToken', response.data.session.token);
+              Cookies1.set('id', response.data.session._id);
+              
               alert(response.data.session.email)
             }
           }).catch((error)=>{
