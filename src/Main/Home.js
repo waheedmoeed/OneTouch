@@ -1,11 +1,22 @@
-import React, {Component} from "react"
+import React, {Component} from 'react';
+
+import {Container} from "react-bootstrap"
+import SideNavBar from '../CommonComp/SideNavBar'
+
+import '../Styles/home.css'
+import SocialSignIn from '../Authorization/SocialSignIn';
 
 class Home extends Component{
     render(){
         return(
-            <div>
-                <h1>hello</h1>
+            <>
+            <SideNavBar/>
+            <div className="main">
+                <Container>
+                   <SocialSignIn/>
+                </Container>
             </div>
+            </>
         )
     }
 }

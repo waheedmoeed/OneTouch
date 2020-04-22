@@ -46,12 +46,12 @@ class SignUpForm extends Component{
                     <div className = "App__Form">                   
                         <div className="PageSwitcher">                
                             <NavLink to = "/sign-in"   activeClassName = "PageSwitcher__Item--Active" className = "PageSwitcher__Item"> Sign In </NavLink>
-                            <NavLink exact to = "/"   activeClassName = "PageSwitcher__Item--Active" className = "PageSwitcher__Item  "> Sign Up </NavLink>              
+                            <NavLink exact to = "/sign-up"   activeClassName = "PageSwitcher__Item--Active" className = "PageSwitcher__Item  "> Sign Up </NavLink>              
                         </div>                   
                         <div className = "FormTitle">                
                             <NavLink to= "/sign-in"  activeClassName = "FormTitle__Link--Active"    className ="FormTitle__Link"> Sign In</NavLink>                
                             or                 
-                            <NavLink exact to ="/" className ="FormTitle__Link "  activeClassName = "FormTitle__Link--Active"> Sign Up</NavLink>
+                            <NavLink exact to ="/sign-up" className ="FormTitle__Link "  activeClassName = "FormTitle__Link--Active"> Sign Up</NavLink>
                         </div>                     
 
             <div className = "FormCenter">

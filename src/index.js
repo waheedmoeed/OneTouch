@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route, BrowserRouter, Redirect} from 'react-router-dom'
+import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
 
 import SignUpForm from './Authorization/SignUpForm';
 import SignInForm from './Authorization/SignInForm';
+
+import Fb_Main from './Social/Fb_Main'
+import Tw_Main from './Social/Tw_Main'
+import Inst_Main from './Social/Inst_Main'
+import Pin_Main from './Social/Pin_Main'
+import UserSettings from './Main/UserSettings'
+
+import InstagramRedirect from "./RedirectComp/InstagramRedirect"
 import Home from "./Main/Home"
 import * as serviceWorker from './serviceWorker';
 import './Styles/index.css';
-
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   return (
@@ -23,13 +30,29 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   );
 };
 
-const routing = (
-  <BrowserRouter>
-        <PrivateRoute exact path="/home" component = {Home}/>       
-        <Route exact path = "/" component={SignUpForm}/>
-        <Route exact path = "/sign-in" component={SignInForm}/>
-  </BrowserRouter>
+const redirect_routes =(
+  <Route path="/instagaram-redirect/" component={InstagramRedirect}/>
 )
+
+const routing = (
+  <React.Fragment>
+    <BrowserRouter>   
+      <Switch>
+        <Route exact path="/" component = {Home}/> 
+        <Route path="/fb" component={Fb_Main} />
+        <Route path="/tw" component={Tw_Main} />
+        <Route path="/inst" component={Inst_Main}/>
+        <Route path="/pin" component={Pin_Main}/>
+        <Route path="/user-settings" component={UserSettings}/>
+      </Switch>
+
+      <Route exact path = "/sign-up" component={SignUpForm}/>
+      <Route exact path = "/sign-in" component={SignInForm}/>
+      {redirect_routes}
+    </BrowserRouter>
+  </React.Fragment>
+)
+
 ReactDOM.render(
     routing,
   document.getElementById('root') 
