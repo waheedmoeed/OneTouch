@@ -1,9 +1,16 @@
 body{
     background: radial-gradient(#e5e5e5,#ffff,#e5e5e5);
+    overflow-x: hidden;
+}
+
+.jumbotron{
+    overflow-x: scroll;
+    padding: 2rem 2rem;
 }
 
 .card{
     width: 20rem;
+    
 }
 
 .card:hover{
@@ -11,7 +18,7 @@ body{
 }
 
 .card-body{
-    padding: 3rem 0 !important;
+    padding: 2rem 0 !important;
 }
 
 .card-text{
@@ -19,10 +26,10 @@ body{
     padding: 0.4rem 1.9rem;
 }
 
-.container-fluid .row{
-    padding-top: 6rem;
-}
-
+/* .container-fluid .row{
+    padding-top: 0rem;
+} */
+/* 
 .overflow{
     overflow: hidden;
 }
@@ -35,4 +42,4 @@ body{
 .card-img-top:hover{
     transform: scale(1.4);
     
-}
+} */

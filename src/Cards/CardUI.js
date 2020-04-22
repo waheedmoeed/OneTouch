@@ -1,23 +1,21 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import '../Styles/card-styles.css'
 
-const Card = props =>{
+
+const Cards = props =>{
     return(
-        <div className="card text-center shadow">
-            <div className="overflow">
-                <img src={props.imgsrc} className="card-img-top" alt="" />
-            </div>
-            <div className="card-body text-dark">
-                <h4 className="card-title">
-                    {props.title}
-                </h4>
-                <p className="card-text text-secondary">
-                    lorem ipsum Waheed 
-                </p>
-                <a href="test" className="btn btn-outline-success">Go Somewhere</a>
-            </div>
-        </div>
+
+    <Card className="text-center shadow">
+        <Card.Img variant="top" src={props.imgsrc} />
+        <Card.Body className="text-dark">
+            <Card.Title>{props.title}</Card.Title>
+    <Card.Text>{props.text}</Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+    </Card>
     );
 }
 
-export default Card;
+export default Cards;
