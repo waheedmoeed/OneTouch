@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
 
+import {createStore} from 'redux'
+
 import SignUpForm from './Authorization/SignUpForm';
 import SignInForm from './Authorization/SignInForm';
 
@@ -16,6 +18,10 @@ import Home from "./Main/Home"
 import * as serviceWorker from './serviceWorker';
 import './Styles/index.css';
 
+import {Provider} from 'react-redux'
+import rootReducer from './Store/reducers'
+const store  = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() )
+
 const PrivateRoute = ({ component: Component, ...props }) => {
   return (
     <Route
@@ -24,7 +30,7 @@ const PrivateRoute = ({ component: Component, ...props }) => {
         localStorage.getItem("sessionToken")? 
             <Component {...innerProps} />
             :
-            <Redirect to="/" />
+            <Redirect to="/sign-in" />
       }
     />
   );
@@ -38,12 +44,14 @@ const routing = (
   <React.Fragment>
     <BrowserRouter>   
       <Switch>
-        <Route exact path="/" component = {Home}/> 
-        <Route path="/fb" component={Fb_Main} />
-        <Route path="/tw" component={Tw_Main} />
-        <Route path="/inst" component={Inst_Main}/>
-        <Route path="/pin" component={Pin_Main}/>
-        <Route path="/user-settings" component={UserSettings}/>
+        <Provider store= {store}>
+          <Route exact path="/" component = {Home}/> 
+          <PrivateRoute path="/fb" component={Fb_Main} />
+          <PrivateRoute path="/tw" component={Tw_Main} />
+          <Route path="/inst" component={Inst_Main}/>
+          <PrivateRoute path="/pin" component={Pin_Main}/>
+          <Route path="/user-settings" component={UserSettings}/>
+        </Provider>
       </Switch>
 
       <Route exact path = "/sign-up" component={SignUpForm}/>

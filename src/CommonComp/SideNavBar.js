@@ -53,7 +53,7 @@ class SideNav extends React.Component {
                     path: '/user-settings',
                     name: 'userSettings',
                     css: 'fa fa-user-cog',
-                    key: 5
+                    key: 6
                 }
               ]
         }
