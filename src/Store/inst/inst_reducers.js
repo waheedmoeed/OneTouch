@@ -3,7 +3,7 @@ import * as actions from './action'
 export const initialState = {
   tried:false,
   token : {
-    accessToken: "",
+    accessToken: "IGQVJWY1VLWG12ZAndjemNOcjNEV1RHRVZA3NFFyVGktb3VId3lOY3F6MXh3dS0xelFUTk42SnNOWllXMWQtZAHAwdDNHZADE3UE9oOXZAWdWlzcTQtYWZA6ZAFRleklQNWpyLXN4TzdhR0JB",
     userId: ""
   },
 }
