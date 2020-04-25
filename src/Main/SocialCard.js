@@ -13,7 +13,7 @@ class SocialCard extends Component{
                     <span className="icon" style={{color:this.props.color}}>
                         <i className={this.props.icon}/>
                     </span>
-                    <Card.Title style={{"text-align":'center'}}>{this.props.title}</Card.Title>
+                    <Card.Title style={{"textAlign":'center'}}>{this.props.title}</Card.Title>
                     <Card.Text>
                         {this.props.text}                    
                     </Card.Text>
