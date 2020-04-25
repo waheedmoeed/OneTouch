@@ -1,13 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+<<<<<<< HEAD
 import {Route, BrowserRouter, Redirect} from 'react-router-dom'
 
 import SignUpForm from './Authorization/SignUpForm';
 import SignInForm from './Authorization/SignInForm';
+=======
+import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
+
+import {createStore} from 'redux'
+
+import SignUpForm from './Authorization/SignUpForm';
+import SignInForm from './Authorization/SignInForm';
+
+import Fb_Main from './Social/Fb_Main'
+import Tw_Main from './Social/Tw_Main'
+import Inst_Main from './Social/Inst_Main'
+import Pin_Main from './Social/Pin_Main'
+import UserSettings from './Main/UserSettings'
+
+import InstagramRedirect from "./RedirectComp/InstagramRedirect"
+>>>>>>> master
 import Home from "./Main/Home"
 import * as serviceWorker from './serviceWorker';
 import './Styles/index.css';
 
+<<<<<<< HEAD
+=======
+import {Provider} from 'react-redux'
+import rootReducer from './Store/reducers'
+const store  = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() )
+>>>>>>> master
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   return (
@@ -17,12 +40,17 @@ const PrivateRoute = ({ component: Component, ...props }) => {
         localStorage.getItem("sessionToken")? 
             <Component {...innerProps} />
             :
+<<<<<<< HEAD
             <Redirect to="/" />
+=======
+            <Redirect to="/sign-in" />
+>>>>>>> master
       }
     />
   );
 };
 
+<<<<<<< HEAD
 const routing = (
   <BrowserRouter>
         <PrivateRoute exact path="/home" component = {Home}/>       
@@ -30,6 +58,33 @@ const routing = (
         <Route exact path = "/sign-in" component={SignInForm}/>
   </BrowserRouter>
 )
+=======
+const redirect_routes =(
+  <Route path="/instagaram-redirect/" component={InstagramRedirect}/>
+)
+
+const routing = (
+  <React.Fragment>
+    <BrowserRouter>   
+      <Switch>
+        <Provider store= {store}>
+          <Route exact path="/" component = {Home}/> 
+          <PrivateRoute path="/fb" component={Fb_Main} />
+          <PrivateRoute path="/tw" component={Tw_Main} />
+          <Route path="/inst" component={Inst_Main}/>
+          <PrivateRoute path="/pin" component={Pin_Main}/>
+          <Route path="/user-settings" component={UserSettings}/>
+        </Provider>
+      </Switch>
+
+      <Route exact path = "/sign-up" component={SignUpForm}/>
+      <Route exact path = "/sign-in" component={SignInForm}/>
+      {redirect_routes}
+    </BrowserRouter>
+  </React.Fragment>
+)
+
+>>>>>>> master
 ReactDOM.render(
     routing,
   document.getElementById('root') 
@@ -39,3 +94,8 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+<<<<<<< HEAD
+=======
+
+//dadce1 light blue
+>>>>>>> master

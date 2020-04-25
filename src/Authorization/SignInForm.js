@@ -63,44 +63,42 @@ class SignInForm extends Component{
     render(){
         return(
             <div className="App">
-                    <div className = "App__Aside"></div>           
-                    <div className = "App__Form">                   
-                        <div className="PageSwitcher">                
-                            <NavLink to = "/sign-in"   activeClassName = "PageSwitcher__Item--Active" className = "PageSwitcher__Item"> Sign In </NavLink>
-                            <NavLink exact to = "/"   activeClassName = "PageSwitcher__Item--Active" className = "PageSwitcher__Item  "> Sign Up </NavLink>              
-                        </div>                   
-                        <div className = "FormTitle">                
+                <div className = "App__Aside"></div>           
+                <div className = "App__Form">                   
+                    <div className="PageSwitcher">                
+                        <NavLink to = "/sign-in"   activeClassName = "PageSwitcher__Item--Active" className = "PageSwitcher__Item"> Sign In </NavLink>
+                        <NavLink exact to = "/sign-up"   activeClassName = "PageSwitcher__Item--Active" className = "PageSwitcher__Item  "> Sign Up </NavLink>              
+                    </div>                   
+                    <div className = "FormTitle">                
                             <NavLink to= "/sign-in"  activeClassName = "FormTitle__Link--Active"    className ="FormTitle__Link"> Sign In</NavLink>                
                             or                 
-                            <NavLink exact to ="/" className ="FormTitle__Link "  activeClassName = "FormTitle__Link--Active"> Sign Up</NavLink>
+                            <NavLink exact to ="/sign-up" className ="FormTitle__Link "  activeClassName = "FormTitle__Link--Active"> Sign Up</NavLink>
                         </div>
-            <div className = "FormCenter">
-
-            <form className = "FormFields" onSubmit = {this.handleSubmit}>
-                   <div className = "FormField">
-                       <label className = "FormField__Label" htmlFor="email">Email Address</label>
-                       <input 
-                           type = "email" id="email" className = "FormField__Input" placeholder = "Enter your Email ID"  onChange={this.handleChange} name="email">
-                       </input>                  
-                  </div> 
-                  <div className = "FormField">
-                       <label className = "FormField__Label" htmlFor="password">Password</label>
-                       <input type = "password" id = "password" className = "FormField__Input" placeholder = "Enter your Password"
-                        name="password" onChange={this.handleChange}>
-                        </input>                   
-                  </div> 
-                  <div className= "FormField">
-                        <button className ="FormField__Button mr-20" type="submit">Sign In</button>
-                       <Link exact="true" to="/" className = "FormField__Link" > Create an Account </Link>
-                  </div>
-            </form> 
-
-        </div>
-        </div>
-        </div>
+                    <div className = "FormCenter">
+                        <form className = "FormFields" onSubmit = {this.handleSubmit}>
+                            <div className = "FormField">
+                                <label className = "FormField__Label" htmlFor="email">Email Address</label>
+                                <input 
+                                    type = "email" id="email" className = "FormField__Input" placeholder = "Enter your Email ID"  onChange={this.handleChange} name="email">
+                                </input>                  
+                            </div> 
+                            <div className = "FormField">
+                                <label className = "FormField__Label" htmlFor="password">Password</label>
+                                <input type = "password" id = "password" className = "FormField__Input" placeholder = "Enter your Password"
+                                    name="password" onChange={this.handleChange}>
+                                    </input>                   
+                            </div> 
+                            <div className= "FormField">
+                                    <button className ="FormField__Button mr-20" type="submit">Sign In</button>
+                                <Link exact="true" to="/sign-up" className = "FormField__Link" > Create an Account </Link>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
         );
     
- }
+    }
 }
 
 
