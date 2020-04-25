@@ -45,7 +45,7 @@ class SignInForm extends Component{
             password: this.password
         }
         
-        Axios.post("http://onetouch-portal.herokuapp.com/authenticateUser/", user).then((response)=>{
+        Axios.post("https://onetouch-portal.herokuapp.com/authenticateUser/", user).then((response)=>{
             
             if(response.status === 200){
               //localStorage.setItem("sessionToken", response.data.session)
@@ -54,7 +54,7 @@ class SignInForm extends Component{
               Cookies1.set('sessionToken', response.data.session.token);
               Cookies1.set('id', response.data.session._id);
               
-              alert(response.data.session.email)
+              window.location.href = "/"
             }
           }).catch((error)=>{
             alert(error)

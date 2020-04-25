@@ -1,50 +1,81 @@
-var axios = require('axios');
-require("dotenv").config();
+import React, {Component} from 'react';
+import { connect } from 'react-redux'
+
+import Axios from 'axios'
+import Cds from '../../Cards/CardUI';
 
 
-var authorize= true;
+class InstaMedia extends Component{
+  constructor(props){
+      super(props)
+      this.state = {
+        media: [],
+        
+      }
+  }
 
-module.exports={
-        getMedia : function(req, res){
-            const logger = winston.get('getMedia.js')
-            //const access_token = "IGQVJWY1VLWG12ZAndjemNOcjNEV1RHRVZA3NFFyVGktb3VId3lOY3F6MXh3dS0xelFUTk42SnNOWllXMWQtZAHAwdDNHZADE3UE9oOXZAWdWlzcTQtYWZA6ZAFRleklQNWpyLXN4TzdhR0JB"
-                
-                var options = {
-                  'method': 'POST',
-                  'url': 'https://graph.instagram.com/me/media?fields=id,caption,username&access_token=',
-                  'headers': {
-                    
-                  },
-                  formData: {
-                    'client_id': process.env.insta_client_id,
-                    'client_secret': process.env.insta_client_secret,
-                    'grant_type': 'authorization_code',
-                    'redirect_uri': 'https://localhost:3000/instagaram-redirect/',
-                    'code': 'AQCQR88F-6Zyd_uGM8siNCvnjMfRDV60pd1h4L8229c-am1nESuQ0-cdf1zjAb4H4PBQUlokT7ngg2lCTa_tz-ATBJQEG8KvUfRFTD2JfPI6wqtpDYN379NNzM_TE-xjkgccHzkGp2ZK7sd5tKO9x_3UGezu_qWK4A9u20Z7tLsYXed8xvaPAgAozrXjTpQbcCqTOUSarqUyGdr31O1RRtnSegGg13KLZHhdq4Ym-bN2_g'
-                  }
-                };
-                request(options, function (error, response) { 
-                  if (error) {
-                      logger.error(error);
-                      res.statusCode = 400;
-                      res.send(error);
-                  }
-                  else {
-                      logger.info(response);
-                      res.statusCode = 200;
-                      res.send(response);
-                  }
-                  console.log(response.body);
-                });
-                
-        }
-    }
+  // componentDidUpdate(prevProps) {
+  //     console.log("updated")
+  //     console.log(this.props.token)
+  // }
 
+  //get tokens from server and store them in redux store
+  componentDidMount(){
+      //Todo: Change it to set all tokens in store and change id of user (get it from cookies)
+      Axios.get("https://graph.instagram.com/me/media?fields=id,caption,media_url,thumbnail_url,timestamp,media_type,username&access_token="+this.props.token)
+      .then((response)=>{
+          if(response.status === 200){                
+              console.log(response.data);
+              //if(response.data.data.media_type == 'IMAGE'){
+                console.log("Here")
+                this.setState({ media: response.data.data});
+                // this.setState({ videos: response.data.data});
+            //}
+          }else{
+              //If no token founded in response
+              console.log("Error")
+          }
+        }).catch((error)=>{
+          
+        })
+  }
+
+  render() {
+    return[
+      
+      <div style={{display: 'flex'}}>
+        
+      { this.state.media.map((data,index) => {
+                  console.log(index);
+                  if(data.media_type == "IMAGE"){
+                  return  <div className={index}> <Cds imgsrc={data.media_url} title={data.caption} timestamp={data.timestamp}/> </div> 
+                }
+                else {
+                  return <video controls width="200" src={data.media_url} type="video/mp4" /> 
+                  // return <div className={index}> <Cds imgsrc={data.thumbnail_url} title={data.caption} timestamp={data.timestamp}/>  </div> 
+                }
+                })}
+
+                  {/* { this.state.videos.map((video) =>{
+    return <video style={{marginLeft: '500px'}} width="200" controls src={video.media_url} type="video/mp4" />
+   
+})} */}
+
+      
+     
+    </div>
+    
+  ];
+  }
+
+
+
+}
 // this,props,token
   const mapStateToProps = (state) => ({
       // ... computed data from state and optionally ownProps
       token: state.instagram.token.accessToken,
-      userId: state.instagram.token.userId,
+      //userId: state.instagram.token.userId,
       
   })
 
