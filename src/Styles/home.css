@@ -1,3 +1,11 @@
 .main{
-    margin-left: 60px;
+    background-color: #e9ebee;
+    min-height: 576px;
+    width: 100%;
+    height: 100%;
+}
+
+.panel{
+    margin-left: 40px;
+    padding-top: 20px;
 }

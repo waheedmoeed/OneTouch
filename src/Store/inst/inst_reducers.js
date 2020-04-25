@@ -1,10 +1,14 @@
 import * as actions from './action'
 
 export const initialState = {
-  tried:false,
+  tried:true,
   token : {
     accessToken: "IGQVJWY1VLWG12ZAndjemNOcjNEV1RHRVZA3NFFyVGktb3VId3lOY3F6MXh3dS0xelFUTk42SnNOWllXMWQtZAHAwdDNHZADE3UE9oOXZAWdWlzcTQtYWZA6ZAFRleklQNWpyLXN4TzdhR0JB",
+<<<<<<< HEAD
     userId: ""
+=======
+    userId: "17855978839920635"
+>>>>>>> 3e041fa50b570155de47e2d6b0b206f0ccee9cbe
   },
 }
   
