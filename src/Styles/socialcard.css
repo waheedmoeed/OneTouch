@@ -1,0 +1,12 @@
+.icon{/* width must be same size as NavBar to center */
+    display: flex; /* Aligns <a> inside of NavIcon div */
+    font-size: 4.5em;
+    opacity:0.7;
+    margin-bottom: 10px;
+    margin-left: 30%;
+    align-self: center;
+}
+
+.icon:hover {
+    opacity: 1;
+}
