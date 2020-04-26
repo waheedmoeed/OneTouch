@@ -81,7 +81,7 @@ class InstaMedia extends Component{
                 }
                 })}
                 
-                <img width="200px" height="200px" src={this.state.profilePic}/>
+                <img width="200px" style={{borderRadius: "50%"}} height="200px" src={this.state.profilePic}/>
 
                   {/* { this.state.videos.map((video) =>{
     return <video style={{marginLeft: '500px'}} width="200" controls src={video.media_url} type="video/mp4" />
