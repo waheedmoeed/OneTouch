@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Axios from 'axios'
 import Cds from '../../Cards/CardUI';
+import Pds from '../../Cards/UserInfo';
 import Vds from '../../Cards/VideoCardUI';
 
 
@@ -13,7 +14,12 @@ class InstaMedia extends Component{
       this.state = {
         media: [],
         profilePic: '',
-        
+        username: '',
+        bio: '',
+        posts: "0",
+        followers: "0",
+        follows: "0",
+        full_name: "",
       }
   }
 
@@ -41,7 +47,9 @@ class InstaMedia extends Component{
                 .then((response)=>{
                     if(response.status === 200){                
                       console.log(response);
-                        this.setState({profilePic: response.data.graphql.user.profile_pic_url})
+                      const BASE=response.data.graphql.user;
+                        this.setState({username: BASE.username,profilePic: BASE.profile_pic_url,bio: BASE.biography,posts: BASE.edge_owner_to_timeline_media.count ,
+                          followers: BASE.edge_followed_by.count,follows: BASE.edge_follow.count,full_name: BASE.full_name})
                         
                           //this.setState({ media: response.data.data});
                     }else{
@@ -66,8 +74,10 @@ class InstaMedia extends Component{
 
   render() {
     return[
-      
-      <div style={{display: 'flex'}}>
+      <div>
+        <Pds imgsrc={this.state.profilePic} full_name={this.state.full_name} title={this.state.username} noPost={this.state.posts} followers={this.state.followers} follows={this.state.follows}  text={this.state.bio}></Pds>
+        
+      <div style={{display: 'flex',marginTop: "5%"}}>
       
       { this.state.media.map((data,index) => {
         
@@ -81,7 +91,7 @@ class InstaMedia extends Component{
                 }
                 })}
                 
-                <img width="200px" style={{borderRadius: "50%"}} height="200px" src={this.state.profilePic}/>
+                
 
                   {/* { this.state.videos.map((video) =>{
     return <video style={{marginLeft: '500px'}} width="200" controls src={video.media_url} type="video/mp4" />
@@ -90,7 +100,7 @@ class InstaMedia extends Component{
 
       
      
-    </div>
+    </div></div>
     
   ];
   }
