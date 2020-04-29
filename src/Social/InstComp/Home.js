@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
+import InstaMedia from './InstaMedia';
+
+import '../../Styles/inst_main.css'
 
 class Home extends Component{
     render(){
         return(
-            <>
-            <h1>this is Instagram home</h1>
-            </>
+            <div>
+            <InstaMedia/>
+            </div>
         )
     }
 }

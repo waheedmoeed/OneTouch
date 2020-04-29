@@ -37,7 +37,7 @@ class TwConnect extends Component{
 
   render(){
     return(
-          <Button onClick={this.openWindow} className="primary" style={{float: "right"}}>Connect</Button>
+          <Button onClick={this.openWindow} className="primary" style={{float: "right", marginRight:"10px"}}>Connect</Button>
       )
     }
 }

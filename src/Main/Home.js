@@ -12,7 +12,6 @@ class Home extends Component{
         return(
             <>
             <SideNavBar/>
-            <div className="main">
                 <Container>                    
                     <h3 style={{padding:"20px"}}>Most Popular</h3>
                     <div className="panel">
@@ -22,7 +21,6 @@ class Home extends Component{
                     <SocialCard icon="fab fa-pinterest-square" color="#c8232c" title="Pinterest" platform = "pinterest" text={text}/>                   
                     </div>
                 </Container>                   
-            </div>
             </>
         )
     }

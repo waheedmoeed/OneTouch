@@ -99,6 +99,7 @@ const StyledNavItem = styled.div`
         text-decoration:none;
         :hover {
             opacity: 0.7;    
+            color:"white";
             text-decoration: none; /* Gets rid of underlining of icons */
         }  
     }
