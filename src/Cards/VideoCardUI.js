@@ -12,7 +12,9 @@ const Cards = props =>{
             <Card.Title>{props.title}</Card.Title>
     <Card.Text>{props.text}</Card.Text>
     <Card.Text>{props.timestamp}</Card.Text>
-        
+    <i className=" far fa-heart"  style={{fontSize: "40px"}}></i>
+    <i className=" far fa-comment" style={{fontSize: "40px"}}></i>
+    <i className=" far fa-paper-plane" style={{fontSize: "40px"}}></i>
         </Card.Body>
     </Card>
     );

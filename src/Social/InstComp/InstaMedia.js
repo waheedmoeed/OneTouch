@@ -38,7 +38,7 @@ class InstaMedia extends Component{
       Axios.get("https://graph.instagram.com/me/media?fields=id,username,caption,media_url,thumbnail_url,timestamp,media_type,username&access_token="+this.props.token)
       .then((response)=>{
           if(response.status === 200){                
-              
+              console.log(response)
               s = response.data.data[0].username;
                 this.setState({ media: response.data.data});
         
