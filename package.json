@@ -13,6 +13,7 @@
     "react-scripts": "3.4.1",
     "react-spinners": "^0.8.1",
     "redux": "^4.0.5",
+    "request": "^2.88.2",
     "styled-components": "^4.3.2"
   },
   "scripts": {

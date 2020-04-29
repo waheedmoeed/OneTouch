@@ -5,9 +5,9 @@ import Axios from 'axios'
 
 import ClockLoader from "react-spinners/BeatLoader";
 //Actions on store
-import {setAccessToken} from '../Store/inst/action'
+import {setInstAccessToken} from '../Store/inst/action'
 import SideNavBar from '../CommonComp/SideNavBar'
-import SocialSignIn from '../Authorization/SocialSignIn';
+import SocialCard from '../Main/SocialCard';
 import Home from './InstComp/Home'
 import ErrorComp from '../CommonComp/ErrorComp';
 
@@ -19,11 +19,6 @@ class Inst_Main extends Component{
             errorOccur : false
         }
         this.loading=false
-    }
-
-    componentDidUpdate(prevProps) {
-        console.log("updated")
-        console.log(this.props.token)
     }
 
     //get tokens from server and store them in redux store
@@ -64,7 +59,7 @@ class Inst_Main extends Component{
             if(this.props.tried){
                 //If token is not present after doing request to server
                 if(this.props.token.accessToken===""){                    
-                    comp = <SocialSignIn></SocialSignIn>
+                    comp = <SocialCard icon="fab fa-instagram" color="rgb(193,53,132)" title="Instagram Basic API" platform="instagram" text="Basic engament with your account like getting posts,profile etc"/>
                 }else{
                     console.log("Home called")
                     comp = <Home></Home>
@@ -99,7 +94,7 @@ const mapStateToProps = (state) => ({
   
 const mapDispatchToProps = {
     // ... normally is an object full of action creators
-    setAccessToken
+    setInstAccessToken
   }
   
 

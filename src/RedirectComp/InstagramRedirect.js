@@ -6,7 +6,10 @@ import CircleLoader from "react-spinners/BeatLoader";
 class InstagramRedirect extends Component{
     componentDidMount(){
         let token = window.location.search
-        window.opener.postMessage({token:token.substring(6,token.lenght)})
+        window.opener.postMessage({token:{
+            accessToken : token.substring(6,token.lenght),
+            type : "Instagram"
+        }})
         window.opener.focus()
         //window.close()        
     }

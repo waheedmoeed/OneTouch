@@ -7,6 +7,6 @@
     align-self: center;
 }
 
-.icon:hover {
+.card:hover .icon{
     opacity: 1;
 }

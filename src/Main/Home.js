@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 
 import SideNavBar from '../CommonComp/SideNavBar'
 import SocialCard from './SocialCard'
-import {Container,Row, Col} from 'react-bootstrap'
+import {Container} from 'react-bootstrap'
 
 import '../Styles/home.css'
-import SocialSignIn from '../Authorization/SocialSignIn';
 
 class Home extends Component{
     render(){
@@ -14,25 +13,14 @@ class Home extends Component{
             <>
             <SideNavBar/>
             <div className="main">
-                <Container>
-                    <h3 style={{paddingTop:"20px"}}>Most Popular</h3>
-                    <Row className="panel">                            
-                        <Col lg="2">
-                        <SocialCard icon="fab fa-facebook-square" color="#3b5998" title="Facebook Basic API" text={text}/>
-                        </Col>
-                        <Col lg="1"></Col>
-                        <Col lg="2">
-                        <SocialCard icon="fab fa-twitter-square" color="#00acee" title="Twitter Basic API" text={text}/>
-                        </Col>
-                        <Col lg="1"></Col>
-                        <Col lg="2">
-                        <SocialCard icon="fab fa-instagram" color="rgb(193,53,132)" title="Instagram Basic API" text={text}/>
-                        </Col>
-                        <Col lg="1"></Col>
-                        <Col lg="2">
-                        <SocialCard icon="fab fa-pinterest-square" color="#c8232c" title="Pinterest" text={text}/>
-                        </Col>                             
-                    </Row> 
+                <Container>                    
+                    <h3 style={{padding:"20px"}}>Most Popular</h3>
+                    <div className="panel">
+                    <SocialCard icon="fab fa-facebook-square" color="#3b5998" title="Facebook Basic API" platform="facebook" text={text}/>
+                    <SocialCard icon="fab fa-twitter-square" color="#00acee" title="Twitter Basic API" platform="twitter" text={text}/>
+                    <SocialCard icon="fab fa-instagram" color="rgb(193,53,132)" title="Instagram Basic API" platform="instagram" text={text}/>
+                    <SocialCard icon="fab fa-pinterest-square" color="#c8232c" title="Pinterest" platform = "pinterest" text={text}/>                   
+                    </div>
                 </Container>                   
             </div>
             </>

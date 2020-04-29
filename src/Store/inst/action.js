@@ -1,8 +1,8 @@
 //Action types related to access token and user
-export const SET_ACCESS_TOKEN = 'SET ACCESS TOKEN'
+export const SET_INST_ACCESS_TOKEN = 'SET INST ACCESS TOKEN'
 
   
-export const setAccessToken = token => ({
-    type: SET_ACCESS_TOKEN,
+export const setInstAccessToken = token => ({
+    type: SET_INST_ACCESS_TOKEN,
     payload: token,
 })

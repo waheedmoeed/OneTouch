@@ -8,4 +8,6 @@
 .panel{
     margin-left: 40px;
     padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }

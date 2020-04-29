@@ -37,7 +37,7 @@ class SignInForm extends Component{
             email: this.email,
             password: this.password
         }
-        Axios.post("http://onetouch-portal.herokuapp.com/authenticateUser/", user).then((response)=>{
+        Axios.post("http://localhost:5050/authenticateUser/", user).then((response)=>{
             if(response.status === 200){
               localStorage.setItem("sessionToken", response.data.session)
               alert(response.data.session.email)

@@ -10,7 +10,7 @@ export const initialState = {
   
   export default function instReducer(state = initialState, action) {
     switch (action.type) {
-      case actions.SET_ACCESS_TOKEN://update other fields in state
+      case actions.SET_INST_ACCESS_TOKEN://update other fields in state
         return { token :action.payload.token, tried: action.payload.tried}
       default:
         return state
