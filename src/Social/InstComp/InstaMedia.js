@@ -39,7 +39,7 @@ class InstaMedia extends Component{
       .then((response)=>{
         console.log(response)
           if(response.status === 200){                
-              
+              console.log(response)
               s = response.data.data[0].username;
                 this.setState({ media: response.data.data});
         

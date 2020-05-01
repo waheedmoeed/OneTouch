@@ -15,7 +15,7 @@ const Cards = props =>{
         
         <Card.Body className="text-dark">
         <Card.Title>{props.full_name}</Card.Title>   
-    <Card.Text>{props.text}</Card.Text>
+    <Card.Text style={{padding: "0"}} >{props.text}</Card.Text>
         </Card.Body>
         </div>
     </Card>
