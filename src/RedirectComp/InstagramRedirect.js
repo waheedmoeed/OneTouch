@@ -11,7 +11,7 @@ class InstagramRedirect extends Component{
             type : "Instagram"
         }})
         window.opener.focus()
-        //window.close()        
+        window.close()        
     }
 
     render(){

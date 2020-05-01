@@ -37,6 +37,7 @@ class InstaMedia extends Component{
       var s = ''
       Axios.get("https://graph.instagram.com/me/media?fields=id,username,caption,media_url,thumbnail_url,timestamp,media_type,username&access_token="+this.props.token)
       .then((response)=>{
+        console.log(response)
           if(response.status === 200){                
               
               s = response.data.data[0].username;
@@ -112,7 +113,7 @@ class InstaMedia extends Component{
 // this,props,token
   const mapStateToProps = (state) => ({
       // ... computed data from state and optionally ownProps
-      token: state.instagram.token.accessToken,
+      token: state.instagram.basicToken.token.accessToken,
       //userId: state.instagram.token.userId,
       
   })

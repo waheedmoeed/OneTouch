@@ -4,7 +4,9 @@ import Axios from 'axios'
 import ClockLoader from "react-spinners/BeatLoader";
 import Cookies from  'js-cookie'
 
-import {setInstAccessToken} from '../Store/inst/action'
+import {storeBasicInstToken} from './StoreOAuthToken'
+
+import {setInstBasicAccessToken} from '../Store/inst/action'
 import { connect } from 'react-redux';
 
 
@@ -50,17 +52,18 @@ class InstConnect extends Component{
             tw_token:this.code.accessToken,
             token:Cookies.get("sessionToken")//Auth token from cookies
         }
-        Axios.post("http://localhost:5050/validate_inst_token/", user).then((response)=>{
+        Axios.post("http://localhost:5050/validate_inst_token/", user).then(async (response)=>{
             if(response.data.token !== undefined){
-                let data = JSON.parse(response.data.token)
-                this.props.setInstAccessToken({
-                    tried:true,
-                    token : {
-                        accessToken: data.access_token,
-                        userId: data.user_id
+                let shortTokenData = JSON.parse(response.data.token)
+                //Call the api to store long term access token in db and send bacck long term token 
+                //store long term tokken in store if request is suucessfull 
+                storeBasicInstToken(shortTokenData.access_token).then(()=>{
+                    if(response.data.token !== undefined){
+                        this.setTokenInStore(response.data.token,shortTokenData.user_id)    
+                    }else{
+                        this.setTokenInStore(shortTokenData.access_token, shortTokenData.user_id) 
                     }
                 })
-                this.setState({isProcessing:false})
             }else{
                 //show the error and close the loader/spinner
                 if(response.data.error.Unauthorization !== undefined){
@@ -77,6 +80,17 @@ class InstConnect extends Component{
             console.error(error)  
             this.setState({isProcessing:false})          
           })
+    }
+
+    setTokenInStore(token, id){
+        this.props.setInstBasicAccessToken({
+            tried:true,
+              token : {
+                  accessToken: token,
+                  userId: id
+              }  
+        })
+        this.setState({isProcessing:false})
     }
 
 
@@ -96,7 +110,7 @@ class InstConnect extends Component{
         comp = (this.props.token.accessToken==="")?
             <Button onClick={this.openWindow} className="primary" style={{float: "right", marginRight:"10px"}}>Connect</Button>
             :
-            <Button onClick={this.openWindow} disabled={"true"} className="primary" style={{float: "right", marginRight:"10px"}}>Connected</Button>
+            <Button onClick={this.openWindow} disabled={true} className="primary" style={{float: "right", marginRight:"10px"}}>Connected</Button>
       }
     return(
         <>
@@ -108,12 +122,12 @@ class InstConnect extends Component{
 
 const mapStateToProps = (state) => ({
     // ... computed data from state and optionally ownProps
-    token: state.instagram.token,
+    token: state.instagram.basicToken.token,
 })
 
 const mapDispatchToProps = {
     // ... normally is an object full of action creators
-    setInstAccessToken
+    setInstBasicAccessToken
   }
 
 export default connect(mapStateToProps,mapDispatchToProps)(InstConnect);

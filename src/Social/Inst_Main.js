@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 
 import Axios from 'axios'
+import Cookies from  'js-cookie'
 
 import ClockLoader from "react-spinners/BeatLoader";
 //Actions on store
-import {setInstAccessToken} from '../Store/inst/action'
+import {setInstBasicAccessToken} from '../Store/inst/action'
 import SideNavBar from '../CommonComp/SideNavBar'
 import SocialCard from '../Main/SocialCard';
 import Home from './InstComp/Home'
-import ErrorComp from '../CommonComp/ErrorComp';
 
 
 class Inst_Main extends Component{
@@ -22,28 +22,35 @@ class Inst_Main extends Component{
     }
 
     //get tokens from server and store them in redux store
-    async getAccessTokens(){
+    getAccessTokens(){
         //Todo: Change it to set all tokens in store and change id of user (get it from cookies)
-        Axios.get("http://localhost:5050/inst_token/5e88cb86ec33c2001732d7f6").then((response)=>{
-            if(response.status === 200){                
-                this.props.setAccessToken({
+        Axios.get("http://localhost:5050/basic_inst_token/"+Cookies.get('id')+"?token="+Cookies.get("sessionToken")).then((response)=>{
+            if(response.status === 200){    
+                
+                let tokenData = response.data.token
+                console.log(tokenData.access_token)
+                this.props.setInstBasicAccessToken({
                     tried :true,
-                    token: response
+                    token:{
+                        token: tokenData.access_token,
+                        userId: tokenData.userId || ""                     
+                    }
                 })
             }else{
                 //If no token founded in response
-                this.props.setAccessToken({
+                this.props.setInstBasicAccessToken({
                     tried :true,
                     token:{
                         accessToken: "",
                         userId: ""
-                    }
+                    }  
                 })
             }
           }).catch((error)=>{
             this.setState({
                 errorOccur: true
             })
+            console.log(error)
           })
     }
 
@@ -52,7 +59,7 @@ class Inst_Main extends Component{
         let comp = ""
         this.loading= false
         if(this.state.errorOccur) {
-            comp = <ErrorComp></ErrorComp>
+            comp = <SocialCard icon="fab fa-instagram" color="rgb(193,53,132)" title="Instagram Basic API" platform="instagram" text="Basic engament with your account like getting posts,profile etc"/>
         }else{
             //If request to get accesstoken from server alredy done
             console.log(this.props.tried)
@@ -88,13 +95,13 @@ class Inst_Main extends Component{
 }
 const mapStateToProps = (state) => ({
     // ... computed data from state and optionally ownProps
-    token: state.instagram.token,
+    token: state.instagram.basicToken.token,
     tried: state.instagram.tried
 })
   
 const mapDispatchToProps = {
     // ... normally is an object full of action creators
-    setInstAccessToken
+    setInstBasicAccessToken
   }
   
 
